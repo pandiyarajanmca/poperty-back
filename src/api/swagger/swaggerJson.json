@@ -1,0 +1,1560 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "This is the Swagger Documentation implementation of API's on NodeJS. You will find detailed documentation and model data about the REST API's. To check if an API is working , execute the API after entering the valid parameters",
+		"version": "1.0.0",
+		"title": "Boiler",
+		"termsOfService": "",
+		"contact": {
+			"email": "api@boiler.com"
+		}
+	},
+	"host": "127.0.0.1:4001",
+	"basePath": "/api/v1",
+	"tags": [
+		{
+			"name": "Boiler",
+			"description": "Everything about your Boiler Node"
+		}
+	],
+	"schemes": [
+		"http"
+	],
+	"paths": {
+		"/auth/register": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "Register new user",
+				"description": "Adds a new user data information into the database",
+				"operationId": "UserSaveData",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "register data to be added to db",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/register"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully Created"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/login": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "Login User",
+				"description": "Login User via email and password",
+				"operationId": "UserLoginData",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "email and password for login",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/login"
+						}
+					},
+					{
+						"in": "header",
+						"name": "lang",
+						"description": "User language",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully logged in"
+					},
+					"401": {
+						"description": "Invalid username/password"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/forgot-password": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "forgot password",
+				"description": "forgot password",
+				"operationId": "forgotPassword",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "forgotPassword",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/forgotPassword"
+						}
+					},
+					{
+						"in": "header",
+						"name": "lang",
+						"description": "User language",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully sent mail"
+					},
+					"401": {
+						"description": "Invalid username"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/reset-password": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "reset password",
+				"description": "reset password",
+				"operationId": "resetPassword",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "resetPassword",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/resetPassword"
+						}
+					},
+					{
+						"in": "header",
+						"name": "lang",
+						"description": "User language",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully changed password"
+					},
+					"401": {
+						"description": "Invalid username"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/resend": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "resend verification link",
+				"description": "resend verification link",
+				"operationId": "resendVerificationLink",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "resendVerificationLink",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/resendVerificationLink"
+						}
+					},
+					{
+						"in": "header",
+						"name": "lang",
+						"description": "User language",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully sent mail"
+					},
+					"401": {
+						"description": "Invalid username"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/change-password": {
+			"put": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "change password",
+				"description": "change password",
+				"operationId": "changePassword",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "resetPassword",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/changePassword"
+						}
+					},
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully changed password"
+					},
+					"401": {
+						"description": "Invalid username"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/activate": {
+			"put": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "verify user email",
+				"description": "verify user email by activation code",
+				"operationId": "UseVerifyEmail",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "verify user email by activation code",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/verifyEmail"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Email verified successfully"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/send-otp": {
+			"post": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "send otp to phone number for verification",
+				"description": "send otp to phone number for verification",
+				"operationId": "sendOtp",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "sendOtp",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/sendOtp"
+						}
+					},
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully sent mail"
+					},
+					"401": {
+						"description": "Invalid username"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/auth/verify-phone": {
+			"put": {
+				"tags": [
+					"Authentication"
+				],
+				"summary": "verify user phone number",
+				"description": "verify user phone by otp",
+				"operationId": "verifyPhone",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "verify user phone number by otp",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/verifyPhone"
+						}
+					},
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Email verified successfully"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/user/user": {
+			"get": {
+				"tags": [
+					"User"
+				],
+				"summary": "get user list",
+				"description": "get user list",
+				"operationId": "userList",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "User access token",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "header",
+						"name": "lang",
+						"description": "User language",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/user/{userId}": {
+			"get": {
+				"tags": ["Admin"],
+				"summary": "get an user info",
+				"description": "get user information",
+				"operationId": "getUser",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "userId",
+						"description": "agent id",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully fetch user info"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Admin"],
+				"summary": "delete an user info",
+				"description": "delete user information",
+				"operationId": "getUser",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "userId",
+						"description": "agent id",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully delete user info"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/user-list": {
+			"post": {
+				"tags": ["Admin"],
+				"summary": "get user list",
+				"description": "get user list",
+				"operationId": "getUserList",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "register data to be added to db",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/userList"
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully fetch user list"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/agent": {
+			"post": {
+				"tags": ["Admin"],
+				"summary": "Register a new agent",
+				"description": "Adds a new agent data information into the database",
+				"operationId": "createAgent",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "register data to be added to db",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/createAgent"
+						}
+					},
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully Created"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/agent/{agentId}": {
+			"put": {
+				"tags": ["Admin"],
+				"summary": "Update an agent",
+				"description": "update agent information",
+				"operationId": "updateAgent",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "register data to be added to db",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/updateAgent"
+						}
+					},
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					}
+					,
+					{
+						"in": "path",
+						"name": "agentId",
+						"description": "agent id",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully Created"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/property-list/{page}/{limit}": {
+			"get": {
+				"tags": ["Admin"],
+				"summary": "List of properties",
+				"description": "List of properties",
+				"operationId": "getPropertyList",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "page",
+						"description": "page number",
+						"required": true,
+						"type": "integer"
+					},
+					{
+						"in": "path",
+						"name": "limit",
+						"description": "limit of the page",
+						"required": true,
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully getting list"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/property/{propertyId}": {
+			"get": {
+				"tags": ["Admin"],
+				"summary": "Property details",
+				"description": "get details of a property",
+				"operationId": "getPropertyDetails",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "propertyId",
+						"description": "Id of the property",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully getting property details"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/deal-list/{page}/{limit}": {
+			"get": {
+				"tags": ["Admin"],
+				"summary": "List of deals",
+				"description": "List of deals",
+				"operationId": "getDealList",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "page",
+						"description": "page number",
+						"required": true,
+						"type": "integer"
+					},
+					{
+						"in": "path",
+						"name": "limit",
+						"description": "limit of the page",
+						"required": true,
+						"type": "integer"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully getting list"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/deal-details/{dealId}": {
+			"get": {
+				"tags": ["Admin"],
+				"summary": "deal details",
+				"description": "get details of a deal",
+				"operationId": "dealDetails",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "path",
+						"name": "dealId",
+						"description": "Id of the deal",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Successfully getting deal details"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/admin/assign-property-to-agent": {
+			"post": {
+				"tags": ["Admin"],
+				"summary": "Assign a property to an agent",
+				"description": "Assign a property to an agent",
+				"operationId": "assignPropertyToAgent",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "register data to be added to db",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/assignPropertyToAgent"
+						}
+					},
+					{
+						"in": "header",
+						"name": "x-access-token",
+						"description": "accessToken",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfully assigned"
+					},
+					"409": {
+						"description": "Invalid input Error"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/property": {
+			"post": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": "Seller adds a property",
+				"description": "Seller adds a property",
+				"operationId": "postProperty",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Seller adds a property",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/postProperty"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/property/{id}": {
+			"get": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": " Fetch Specific Property",
+				"description": "Fetch Specific Property",
+				"operationId": "getProperty",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "uuid",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": " Soft delete specific property",
+				"description": "Soft delete specific property",
+				"operationId": "deleteProperty",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "uuid",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			},
+			"patch": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": " ico details by amdin",
+				"description": "ico details list by amdin based on icoid",
+				"operationId": "getIcoDetails via icoID",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "uuid",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Seller updates a property",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/updateProperty"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/properties/{page}/{limit}": {
+			"get": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": "Fetch All Properties",
+				"description": "Fetch All Properties",
+				"operationId": "getProperties",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "page",
+						"description": "page number",
+						"required": true
+					},
+					{
+						"in": "path",
+						"name": "limit",
+						"description": "number of properties to show on page",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/deals/{page}/{limit}": {
+			"get": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": "Fetch All deals",
+				"description": "Fetch All deals",
+				"operationId": "deals",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "page",
+						"description": "page number",
+						"required": true
+					},
+					{
+						"in": "path",
+						"name": "limit",
+						"description": "number of properties to show on page",
+						"required": true
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/interested-buyers/{id}": {
+			"get": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": " Fetch Specific interested-buyers",
+				"description": "Fetch Specific interested-buyers",
+				"operationId": "interested-buyers",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "uuid",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/deals/{id}": {
+			"get": {
+				"tags": [
+					"SELLER"
+				],
+				"summary": " Fetch Specific deals",
+				"description": "Fetch Specific deals",
+				"operationId": "deals",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"description": "uuid",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		},
+		"/seller/uploadImage": {
+			"post": {
+				"tags": [
+					"S3"
+				],
+				"summary": "common function Upload File",
+				"description": "common function Upload File",
+				"operationId": "uploadFile",
+				"consumes": [
+					"application/x-www-form-urlencoded",
+					"multipart/form-data"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "file",
+						"in": "formData",
+						"description": "image",
+						"required": true,
+						"type": "file"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success"
+					},
+					"500": {
+						"description": "Internal Server Error"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"register": {
+			"type": "object",
+			"required": [
+				"firstName",
+				"lastName",
+				"email",
+				"password"
+			],
+			"properties": {
+				"firstName": {
+					"type": "string",
+					"example": "john22"
+				},
+				"lastName": {
+					"type": "string",
+					"example": "john22"
+				},
+				"email": {
+					"type": "string",
+					"example": "john@blockgemini.com"
+				},
+				"password": {
+					"type": "string",
+					"example": "123qwerty"
+				},
+				"phoneNumber": {
+					"type": "number",
+					"example": "7002708122"
+				},
+				"countryCode": {
+					"type": "number",
+					"example": "91"
+				}
+			},
+			"xml": {
+				"name": "register"
+			}
+		},
+		"login": {
+			"type": "object",
+			"required": [
+				"email",
+				"password"
+			],
+			"properties": {
+				"email": {
+					"type": "string",
+					"example": "john@blockgemini.com"
+				},
+				"password": {
+					"type": "string",
+					"example": "123qwerty"
+				}
+			},
+			"xml": {
+				"name": "signin"
+			}
+		},
+		"forgotPassword": {
+			"type": "object",
+			"required": [
+				"email"
+			],
+			"properties": {
+				"email": {
+					"type": "string",
+					"example": "john@blockgemini.com"
+				}
+			},
+			"xml": {
+				"name": "forgotPassword"
+			}
+		},
+		"resetPassword": {
+			"type": "object",
+			"required": [
+				"password",
+				"code"
+			],
+			"properties": {
+				"password": {
+					"type": "string",
+					"example": "password"
+				},
+				"code": {
+					"type": "string",
+					"example": "123445"
+				}
+			},
+			"xml": {
+				"name": "forgotPassword"
+			}
+		},
+		"verifyEmail": {
+			"type": "object",
+			"required": [
+				"code"
+			],
+			"properties": {
+				"code": {
+					"type": "string",
+					"example": "xfdsgsgsg"
+				}
+			},
+			"xml": {
+				"name": "verifyEmail"
+			}
+		},
+		"sendOtp": {
+			"type": "object",
+			"required": [
+				"phoneNumber"
+			],
+			"properties": {
+				"phoneNumber": {
+					"type": "integer",
+					"example": "7002708122"
+				},
+				"countryCode": {
+					"type": "number",
+					"example": "91"
+				}
+			},
+			"xml": {
+				"name": "verifyEmail"
+			}
+		},
+		"verifyPhone": {
+			"type": "object",
+			"required": [
+				"otp"
+			],
+			"properties": {
+				"otp": {
+					"type": "string",
+					"example": "123456"
+				}
+			},
+			"xml": {
+				"name": "verifyPhone"
+			}
+		},
+		"changePassword": {
+			"type": "object",
+			"required": [
+				"oldPassword",
+				"newPassword"
+			],
+			"properties": {
+				"oldPassword": {
+					"type": "string",
+					"example": "123456"
+				},
+				"newPassword": {
+					"type": "string",
+					"example": "123456"
+				}
+			},
+			"xml": {
+				"name": "changePassword"
+			}
+		},
+		"userList": {
+			"type": "object",
+			"required": [
+				"type"
+			],
+			"properties": {
+				"type": {
+					"type": "string",
+					"enum": ["AGENT", "USER"]
+				},
+				"page": {
+					"type": "integer",
+					"example": 0
+				},
+				"limit": {
+					"type": "integer",
+					"example": 10
+				}
+			},
+			"xml": {
+				"name": "userList"
+			}
+		},
+		"createAgent": {
+			"type": "object",
+			"required": [
+				"firstName",
+				"lastName",
+				"email"
+			],
+			"properties": {
+				"firstName": {
+					"type": "string",
+					"example": "john22"
+				},
+				"lastName": {
+					"type": "string",
+					"example": "john22"
+				},
+				"email": {
+					"type": "string",
+					"example": "john@blockgemini.com"
+				},
+				"phoneNumber": {
+					"type": "number",
+					"example": "7002708122"
+				},
+				"countryCode": {
+					"type": "number",
+					"example": "91"
+				}
+			},
+			"xml": {
+				"name": "createAgent"
+			}
+		},
+		"updateAgent": {
+			"type": "object",
+			"required": [
+				"firstName",
+				"lastName",
+				"email"
+			],
+			"properties": {
+				"firstName": {
+					"type": "string",
+					"example": "john22"
+				},
+				"lastName": {
+					"type": "string",
+					"example": "john22"
+				},
+				"email": {
+					"type": "string",
+					"example": "john@blockgemini.com"
+				},
+				"phoneNumber": {
+					"type": "number",
+					"example": "7002708122"
+				},
+				"countryCode": {
+					"type": "number",
+					"example": "91"
+				}
+			},
+			"xml": {
+				"name": "updateAgent"
+			}
+		},
+		"assignPropertyToAgent": {
+			"type": "object",
+			"required": [
+				"agentId",
+				"propertyId"
+			],
+			"properties": {
+				"agentId": {
+					"type": "string",
+					"example": "sdfsdfsdf"
+				},
+				"propertyId": {
+					"type": "string",
+					"example": "jsdfgsgfskgds"
+				}
+			},
+			"xml": {
+				"name": "updateAgent"
+			}
+		},
+		"postProperty": {
+			"type": "object",
+			"required": [
+				"city",
+				"locality",
+				"address",
+				"numberOfBathrooms",
+				"numberOfBedrooms",
+				"numberOfRooms",
+				"livingArea",
+				"email"
+			],
+			"properties": {
+				"propertyName": {
+					"type": "string",
+					"example": "2 BHK Dubai Marina Penthouse Villa"
+				},
+				"subCategory": {
+					"type": "string",
+					"example": "Villa"
+				},
+				"showAddressOnWebsite": {
+					"type": "boolean",
+					"example": true
+				},
+				"sellerPrice": {
+					"type": "number",
+					"example": "50000"
+				},
+				"agentPrice": {
+					"type": "number",
+					"example": "40000"
+				},
+				"floorNumber": {
+					"type": "number",
+					"example": "14"
+				},
+				"totalFloors": {
+					"type": "number",
+					"example": "150"
+				},
+				"city": {
+					"type": "string",
+					"example": "Dubai"
+				},
+				"locality": {
+					"type": "string",
+					"example": "Burj Al Arab"
+				},
+				"address": {
+					"type": "string",
+					"example": "1 Sheikh Mohammed bin Rashid Blvd - Dubai - United Arab Emirates"
+				},
+				"numberOfBathrooms": {
+					"type": "number",
+					"example": "15"
+				},
+				"numberOfBedrooms": {
+					"type": "number",
+					"example": "15"
+				},
+				"numberOfRooms": {
+					"type": "number",
+					"example": "15"
+				},
+				"livingArea": {
+					"type": "number",
+					"example": "2500"
+				},
+				"email": {
+					"type": "string",
+					"example": "john@snow.com"
+				}
+			},
+			"xml": {
+				"name": "postProperty"
+			}
+		},
+		"updateProperty": {
+			"type": "object",
+			"properties": {
+				"city": {
+					"type": "string",
+					"example": "ABC"
+				},
+				"locality": {
+					"type": "string",
+					"example": "DEF"
+				},
+				"address": {
+					"type": "string",
+					"example": "GHI"
+				},
+				"numberOfBathrooms": {
+					"type": "number",
+					"example": "1"
+				},
+				"numberOfBedrooms": {
+					"type": "number",
+					"example": "1"
+				},
+				"numberOfRooms": {
+					"type": "number",
+					"example": "1"
+				},
+				"livingArea": {
+					"type": "number",
+					"example": "2500"
+				},
+				"email": {
+					"type": "string",
+					"example": "john@snow.com"
+				}
+			},
+			"xml": {
+				"name": "updateProperty"
+			}
+		}
+	}
+}
